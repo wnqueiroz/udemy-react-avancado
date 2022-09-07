@@ -79,12 +79,26 @@ export const GET_LANDING_PAGE = gql`
     }
   }
 
+  fragment pricingBox on LandingPage {
+    pricingBox {
+      button {
+        label
+        url
+      }
+      benefits
+      totalPrice
+      priceInstallment
+      numberInstallments
+    }
+  }
+
   query GET_LANDING_PAGE {
     landingPage {
       data {
         attributes {
           ...logo
           ...header
+          ...pricingBox
           ...sectionTech
           ...sectionAgenda
           ...sectionModules
