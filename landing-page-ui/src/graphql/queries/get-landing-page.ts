@@ -52,6 +52,15 @@ export const GET_LANDING_PAGE = gql`
     }
   }
 
+  fragment sectionConcepts on LandingPage {
+    sectionConcepts {
+      title
+      concepts {
+        title
+      }
+    }
+  }
+
   query GET_LANDING_PAGE {
     landingPage {
       data {
@@ -60,6 +69,7 @@ export const GET_LANDING_PAGE = gql`
           ...header
           ...sectionAboutProject
           ...sectionTech
+          ...sectionConcepts
         }
       }
     }
