@@ -34,8 +34,6 @@ export const GET_LANDING_PAGE = gql`
     landingPage {
       data {
         attributes {
-          # alias
-          created_at: createdAt
           ...logo
 
           ...header
