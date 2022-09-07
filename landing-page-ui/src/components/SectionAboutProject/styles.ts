@@ -27,18 +27,16 @@ export const Container = styled.div`
   `}
 `
 
-export const Image = styled.picture`
+export const Image = styled.img`
   max-width: 100%;
 
-  img {
-    display: block;
-    max-width: min(60rem, 100%);
-    margin: 0 auto;
+  display: block;
+  max-width: min(60rem, 100%);
+  margin: 0 auto;
 
-    ${media.lessThan('medium')`
-      max-width: 100%;
-    `}
-  }
+  ${media.lessThan('medium')`
+    max-width: 100%;
+  `}
 `
 
 export const Text = styled.div`
