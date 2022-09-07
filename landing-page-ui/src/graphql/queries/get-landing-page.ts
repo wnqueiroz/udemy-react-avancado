@@ -72,16 +72,24 @@ export const GET_LANDING_PAGE = gql`
     }
   }
 
+  fragment sectionAgenda on LandingPage {
+    sectionAgenda {
+      title
+      description
+    }
+  }
+
   query GET_LANDING_PAGE {
     landingPage {
       data {
         attributes {
           ...logo
           ...header
-          ...sectionAboutProject
           ...sectionTech
-          ...sectionConcepts
+          ...sectionAgenda
           ...sectionModules
+          ...sectionConcepts
+          ...sectionAboutProject
         }
       }
     }
