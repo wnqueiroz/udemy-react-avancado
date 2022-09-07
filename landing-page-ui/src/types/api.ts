@@ -1,4 +1,4 @@
-export type LogoProps = {
+export type ImageDataProps = {
   data: {
     attributes: {
       url: string
@@ -14,17 +14,26 @@ export type HeaderProps = {
     label: string
     url: string
   }
-  image: LogoProps
+  image: ImageDataProps
 }
 
 export type SectionAboutProjectProps = {
   title: string
   description: string
-  image: LogoProps
+  image: ImageDataProps
+}
+
+export type SectionTechProps = {
+  title: string
+  techIcons: {
+    title: string
+    icon: ImageDataProps
+  }[]
 }
 
 export type LandingPageProps = {
-  logo: LogoProps
+  logo: ImageDataProps
   header: HeaderProps
   sectionAboutProject: SectionAboutProjectProps
+  sectionTech: SectionTechProps
 }

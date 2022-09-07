@@ -40,6 +40,18 @@ export const GET_LANDING_PAGE = gql`
     }
   }
 
+  fragment sectionTech on LandingPage {
+    sectionTech {
+      title
+      techIcons {
+        title
+        icon {
+          ...imageData
+        }
+      }
+    }
+  }
+
   query GET_LANDING_PAGE {
     landingPage {
       data {
@@ -47,6 +59,7 @@ export const GET_LANDING_PAGE = gql`
           ...logo
           ...header
           ...sectionAboutProject
+          ...sectionTech
         }
       }
     }
