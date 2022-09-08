@@ -25,6 +25,7 @@ const Index = ({
   sectionTech,
   sectionAgenda,
   sectionAboutUs,
+  sectionReviews,
   sectionModules,
   sectionConcepts,
   sectionAboutProject
@@ -38,7 +39,7 @@ const Index = ({
     <SectionAgenda {...sectionAgenda} />
     <PricingBox {...pricingBox} />
     <SectionAboutUs {...sectionAboutUs} />
-    <SectionReviews />
+    <SectionReviews {...sectionReviews} />
     <SectionFaq />
     <Footer />
     <JsonSchema />

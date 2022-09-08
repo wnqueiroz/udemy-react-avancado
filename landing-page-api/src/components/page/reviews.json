@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_page_reviews",
+  "info": {
+    "displayName": "reviews",
+    "icon": "chalkboard-teacher"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "photo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

@@ -114,6 +114,19 @@ export const GET_LANDING_PAGE = gql`
     }
   }
 
+  fragment sectionReviews on LandingPage {
+    sectionReviews {
+      title
+      reviews {
+        name
+        text
+        photo {
+          ...imageData
+        }
+      }
+    }
+  }
+
   query GET_LANDING_PAGE {
     landingPage {
       data {
@@ -123,10 +136,11 @@ export const GET_LANDING_PAGE = gql`
           ...pricingBox
           ...sectionTech
           ...sectionAgenda
+          ...sectionAboutUs
+          ...sectionReviews
           ...sectionModules
           ...sectionConcepts
           ...sectionAboutProject
-          ...sectionAboutUs
         }
       }
     }
