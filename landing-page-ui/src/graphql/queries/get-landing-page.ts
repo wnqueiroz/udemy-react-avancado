@@ -127,6 +127,16 @@ export const GET_LANDING_PAGE = gql`
     }
   }
 
+  fragment sectionFaq on LandingPage {
+    sectionFaq {
+      title
+      questions {
+        question
+        answer
+      }
+    }
+  }
+
   query GET_LANDING_PAGE {
     landingPage {
       data {
@@ -134,6 +144,7 @@ export const GET_LANDING_PAGE = gql`
           ...logo
           ...header
           ...pricingBox
+          ...sectionFaq
           ...sectionTech
           ...sectionAgenda
           ...sectionAboutUs

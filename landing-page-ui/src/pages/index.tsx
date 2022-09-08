@@ -22,6 +22,7 @@ const Index = ({
   logo,
   header,
   pricingBox,
+  sectionFaq,
   sectionTech,
   sectionAgenda,
   sectionAboutUs,
@@ -40,7 +41,7 @@ const Index = ({
     <PricingBox {...pricingBox} />
     <SectionAboutUs {...sectionAboutUs} />
     <SectionReviews {...sectionReviews} />
-    <SectionFaq />
+    <SectionFaq {...sectionFaq} />
     <Footer />
     <JsonSchema />
   </>
