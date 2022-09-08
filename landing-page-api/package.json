@@ -12,10 +12,10 @@
   "devDependencies": {},
   "dependencies": {
     "@_sh/strapi-plugin-ckeditor": "^1.1.2",
-    "@strapi/plugin-graphql": "^4.3.4",
-    "@strapi/plugin-i18n": "4.3.4",
-    "@strapi/plugin-users-permissions": "4.3.4",
-    "@strapi/strapi": "4.3.4",
+    "@strapi/plugin-graphql": "^4.3.8",
+    "@strapi/plugin-i18n": "4.3.8",
+    "@strapi/plugin-users-permissions": "4.3.8",
+    "@strapi/strapi": "4.3.8",
     "pg": "8.7.3"
   },
   "author": {
