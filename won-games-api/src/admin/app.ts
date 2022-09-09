@@ -7,7 +7,18 @@ export default {
       logo: AuthLogo,
     },
     head: {
-      favicon: Favicon
+      favicon: Favicon,
+    },
+    menu: {
+      logo: Favicon,
+    },
+    translations: {
+      /**
+       * @see https://github.com/strapi/strapi/blob/main/packages/core/admin/admin/src/translations/en.json#L342
+       */
+      en: {
+        "app.components.LeftMenu.navbrand.title": "Won Games",
+      },
     },
     tutorials: false,
     locales: [
