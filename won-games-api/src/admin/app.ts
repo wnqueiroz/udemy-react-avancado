@@ -9,6 +9,7 @@ export default {
     head: {
       favicon: Favicon
     },
+    tutorials: false,
     locales: [
       // 'ar',
       // 'fr',
