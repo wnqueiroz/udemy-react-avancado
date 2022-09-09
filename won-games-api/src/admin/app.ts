@@ -1,9 +1,13 @@
 import AuthLogo from "./extensions/logo-won-dark.svg";
+import Favicon from "./extensions/favicon.png";
 
 export default {
   config: {
     auth: {
       logo: AuthLogo,
+    },
+    head: {
+      favicon: Favicon
     },
     locales: [
       // 'ar',
