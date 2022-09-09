@@ -1,5 +1,10 @@
+import AuthLogo from "./extensions/logo-won-dark.svg";
+
 export default {
   config: {
+    auth: {
+      logo: AuthLogo,
+    },
     locales: [
       // 'ar',
       // 'fr',
