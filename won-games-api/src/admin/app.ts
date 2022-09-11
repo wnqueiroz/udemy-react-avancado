@@ -1,5 +1,26 @@
+import AuthLogo from "./extensions/logo-won-dark.svg";
+import Favicon from "./extensions/favicon.png";
+
 export default {
   config: {
+    auth: {
+      logo: AuthLogo,
+    },
+    head: {
+      favicon: Favicon,
+    },
+    menu: {
+      logo: Favicon,
+    },
+    translations: {
+      /**
+       * @see https://github.com/strapi/strapi/blob/main/packages/core/admin/admin/src/translations/en.json#L342
+       */
+      en: {
+        "app.components.LeftMenu.navbrand.title": "Won Games",
+      },
+    },
+    tutorials: false,
     locales: [
       // 'ar',
       // 'fr',
