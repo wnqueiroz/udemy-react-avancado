@@ -82,7 +82,7 @@
     "platforms": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::plataform.plataform",
+      "target": "api::platform.platform",
       "inversedBy": "games"
     },
     "publisher": {

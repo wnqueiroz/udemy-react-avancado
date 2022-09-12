@@ -1,9 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "plataforms",
+  "collectionName": "platforms",
   "info": {
-    "singularName": "plataform",
-    "pluralName": "plataforms",
+    "singularName": "platform",
+    "pluralName": "platforms",
     "displayName": "Platform"
   },
   "options": {
