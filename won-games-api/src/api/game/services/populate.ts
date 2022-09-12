@@ -21,7 +21,7 @@ async function getGameInfo(slug: string) {
   };
 }
 
-async function createGameRelation(
+async function create(
   strapi: Strapi,
   name: string,
   relation: "publisher" | "developer" | "category" | "platform"
@@ -42,6 +42,35 @@ async function createGameRelation(
     });
 }
 
+async function createManyToManyData(strapi: Strapi, products) {
+  const developers = {};
+  const publishers = {};
+  const categories = {};
+  const platforms = {};
+
+  products.forEach((product) => {
+    const { developer, publisher, genres, supportedOperatingSystems } = product;
+
+    genres &&
+      genres.forEach((item) => {
+        categories[item] = true;
+      });
+    supportedOperatingSystems &&
+      supportedOperatingSystems.forEach((item) => {
+        platforms[item] = true;
+      });
+    developers[developer] = true;
+    publishers[publisher] = true;
+  });
+
+  return Promise.all([
+    ...Object.keys(developers).map((name) => create(strapi, name, "developer")),
+    ...Object.keys(publishers).map((name) => create(strapi, name, "publisher")),
+    ...Object.keys(categories).map((name) => create(strapi, name, "category")),
+    ...Object.keys(platforms).map((name) => create(strapi, name, "platform")),
+  ]);
+}
+
 export default async ({ strapi }: { strapi: Strapi }) => {
   const gogApiUrl = `https://www.gog.com/games/ajax/filtered?mediaType=game&page=1&sort=popularity`;
 
@@ -49,11 +78,7 @@ export default async ({ strapi }: { strapi: Strapi }) => {
     data: { products },
   } = await axios.get(gogApiUrl);
 
-  // const gameInfo = await getGameInfo(products[0].slug);
-
-  await createGameRelation(strapi, products[0].publisher, "publisher");
-
-  await createGameRelation(strapi, products[0].developer, "developer");
+  await createManyToManyData(strapi, products);
 
   return {
     john: "doe",
