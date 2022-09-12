@@ -21,18 +21,64 @@ async function getGameInfo(slug: string) {
   };
 }
 
+async function createGames(strapi: Strapi, products) {
+  await Promise.all(
+    products.map(async (product) => {
+      if (!(await exists(product.title, "game"))) {
+        console.info(`Creating: ${product.title}...`);
+
+        const categories = (
+          await Promise.all(
+            product.genres.map((name) =>
+              getByName(name, "category").then((result) =>
+                result.map(({ id }) => id).flat()
+              )
+            )
+          )
+        ).flat();
+
+        const platforms = (
+          await Promise.all(
+            product.supportedOperatingSystems.map((name) =>
+              getByName(name, "platform").then((result) =>
+                result.map(({ id }) => id).flat()
+              )
+            )
+          )
+        ).flat();
+
+        const data = {
+          data: {
+            name: product.title,
+            slug: product.slug.replace(/_/g, "-"),
+            price: product.price.amount,
+            release_date: new Date(
+              Number(product.globalReleaseDate) * 1000
+            ).toISOString(),
+            categories,
+            platforms,
+            developers: (await getByName(product.developer, "developer")).map(
+              ({ id }) => id
+            ),
+            publisher: (await getByName(product.publisher, "publisher")).map(
+              ({ id }) => id
+            ),
+            ...(await getGameInfo(product.slug)),
+          },
+        };
+
+        return strapi.service(`api::game.game`).create(data);
+      }
+    })
+  );
+}
+
 async function create(
   strapi: Strapi,
   name: string,
   relation: "publisher" | "developer" | "category" | "platform"
 ) {
-  const {
-    pagination: { total: exists },
-  } = (await strapi
-    .service(`api::${relation}.${relation}`)
-    .find({ filters: { name } })) as { pagination: { total: number } };
-
-  if (!exists)
+  if (!(await exists(name, relation)))
     return strapi.service(`api::${relation}.${relation}`).create({
       data: {
         name,
@@ -40,6 +86,33 @@ async function create(
         publishedAt: new Date(),
       },
     });
+}
+
+async function exists(
+  name: string,
+  type: "publisher" | "developer" | "category" | "platform" | "game"
+) {
+  const {
+    pagination: { total: exists },
+  } = (await strapi
+    .service(`api::${type}.${type}`)
+    .find({ filters: { name } })) as { pagination: { total: number } };
+
+  return !!exists;
+}
+
+async function getByName(
+  name: string,
+  type: "publisher" | "developer" | "category" | "platform" | "game"
+) {
+  const { results } = (await strapi
+    .service(`api::${type}.${type}`)
+    .find({ filters: { name } })) as {
+    results: [];
+    pagination: { total: number };
+  };
+
+  return results;
 }
 
 async function createManyToManyData(strapi: Strapi, products) {
@@ -78,7 +151,8 @@ export default async ({ strapi }: { strapi: Strapi }) => {
     data: { products },
   } = await axios.get(gogApiUrl);
 
-  await createManyToManyData(strapi, products);
+  // await createManyToManyData(strapi, products);
+  await createGames(strapi, [products[0]]);
 
   return {
     john: "doe",
