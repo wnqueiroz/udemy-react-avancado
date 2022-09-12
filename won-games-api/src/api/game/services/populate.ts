@@ -26,13 +26,20 @@ async function createGameRelation(
   name: string,
   relation: "publisher" | "developer" | "category" | "platform"
 ) {
-  return strapi.service(`api::${relation}.${relation}`).create({
-    data: {
-      name,
-      slug: slugify(name).toLowerCase(),
-      publishedAt: new Date(),
-    },
-  });
+  const {
+    pagination: { total: exists },
+  } = (await strapi
+    .service(`api::${relation}.${relation}`)
+    .find({ filters: { name } })) as { pagination: { total: number } };
+
+  if (!exists)
+    return strapi.service(`api::${relation}.${relation}`).create({
+      data: {
+        name,
+        slug: slugify(name).toLowerCase(),
+        publishedAt: new Date(),
+      },
+    });
 }
 
 export default async ({ strapi }: { strapi: Strapi }) => {
